@@ -1,4 +1,0 @@
-﻿D:\Useful programs\Visual Studio (C++)\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(502,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
-D:\Useful programs\Visual Studio (C++)\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(503,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
-  Application.cpp
-  ModelViewer.vcxproj -> C:\Unreal\ModelViewer\bin\Debug-x64\ModelViewer\ModelViewer.exe
