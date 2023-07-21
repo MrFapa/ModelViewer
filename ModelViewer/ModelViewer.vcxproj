@@ -58,8 +58,8 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>GLEW_STATIC;MV_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>Dependencies\GLFW\include;Dependencies\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLEW_STATIC;MV_DEBUG;SPDLOG_COMPILED_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>Dependencies\GLFW\include;Dependencies\glew-2.1.0\include;Dependencies\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -78,7 +78,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>GLEW_STATIC;MV_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>Dependencies\GLFW\include;Dependencies\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Dependencies\GLFW\include;Dependencies\glew-2.1.0\include;Dependencies\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -101,6 +101,13 @@
     <ClInclude Include="src\LibraryManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Dependencies\spdlog\src\async.cpp" />
+    <ClCompile Include="Dependencies\spdlog\src\bundled_fmtlib_format.cpp" />
+    <ClCompile Include="Dependencies\spdlog\src\cfg.cpp" />
+    <ClCompile Include="Dependencies\spdlog\src\color_sinks.cpp" />
+    <ClCompile Include="Dependencies\spdlog\src\file_sinks.cpp" />
+    <ClCompile Include="Dependencies\spdlog\src\spdlog.cpp" />
+    <ClCompile Include="Dependencies\spdlog\src\stdout_sinks.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\LibraryManager.cpp" />
     <ClCompile Include="src\main.cpp" />
