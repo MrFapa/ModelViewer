@@ -1,13 +1,7 @@
 
 /.vs/
 /bin/
-/bin
-\bin\
-bin/
-bin\
-\bin
-/bin
-bin-int/
+/bin-int/
 
 # Prerequisites
 *.d
