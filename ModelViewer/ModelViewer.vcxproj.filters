@@ -21,6 +21,7 @@
     <ClInclude Include="src\LibraryManager.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\Logger.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dependencies\spdlog\src\async.cpp">

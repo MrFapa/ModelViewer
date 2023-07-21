@@ -99,6 +99,7 @@
   <ItemGroup>
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\LibraryManager.h" />
+    <ClInclude Include="src\Logger.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dependencies\spdlog\src\async.cpp" />
