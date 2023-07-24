@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "Logger.h"
+#include "OpenGLLogger.h"
 
 bool LibraryManager::InitializeLibraries()
 {
@@ -60,14 +60,13 @@ bool LibraryManager::InitializeGLEW()
 	}
 	// Resets this for the next CreateWindow call
 	glfwWindowHint(GLFW_VISIBLE, GLFW_TRUE);
-
+	
 	glfwMakeContextCurrent(tempWindow);
-
-	GLenum err = glewInit();
+	GLCall(GLenum err = glewInit());
 	if(GLEW_OK != err)
 	{
 		glfwDestroyWindow(tempWindow);
-		LogFatal("GLEW Initialization failed: {}", (const char*) glewGetErrorString(err));
+		
 		glewInitialized = false;
 		return false;
 	}
