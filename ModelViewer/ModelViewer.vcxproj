@@ -100,6 +100,7 @@
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\LibraryManager.h" />
     <ClInclude Include="src\Logger.h" />
+    <ClInclude Include="src\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dependencies\spdlog\src\async.cpp" />
@@ -113,6 +114,7 @@
     <ClCompile Include="src\LibraryManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\OpenGLLogger.h" />
+    <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -22,6 +22,7 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Logger.h" />
+    <ClInclude Include="src\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dependencies\spdlog\src\async.cpp">
@@ -55,5 +56,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\OpenGLLogger.h" />
+    <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
 </Project>
