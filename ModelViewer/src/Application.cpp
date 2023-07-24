@@ -16,8 +16,8 @@ Application::~Application()
 void Application::Run()
 {
 	//LogInfo("Application starts running");
-	Loading::ModelData data = Loading::LoadOBJ("res/models/cube.obj");
-	if(!data.modelName.empty() && !data.vertexCoord.empty())
+	Loading::ModelData data = Loading::LoadOBJ("res/models/plate.obj");
+	if(!data.vertexCoord.empty())
 	{
 		LogInfo("Model '{}' was loaded successfully with a total of {} vertices", data.modelName, data.vertexCoord.size());
 	} else

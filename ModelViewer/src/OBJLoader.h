@@ -16,6 +16,7 @@ namespace Loading
 	{
 		std::string modelName;
 		std::vector<glm::vec3> vertexCoord;
+		std::vector<int> indices;
 		std::vector<glm::vec3> normals;
 		std::vector<glm::vec3> texCoord;
 	};
@@ -69,8 +70,37 @@ namespace Loading
 				}
 				else
 				{
-					LogWarning("Obj could not be loaded properly");
+					LogError("Obj vertices are not 3 dimensional");
 					return {};
+				}
+			} else if(split[0] == "vn")
+			{
+				if (split.size() == 4)
+				{
+					float x = std::stof(split[1]);
+					float y = std::stof(split[2]);
+					float z = std::stof(split[3]);
+					res.normals.push_back({ x, y, z });
+				}
+				else
+				{
+					LogError("Obj has incorrect normals");
+					return {};
+				}
+			} else if(split[0] == "f")
+			{
+				if(split.size() != 4)
+				{
+					LogError("Obj has to be triangulated");
+					return {};
+				}
+
+				for(int i = 1; i < split.size(); i++)
+				{
+					std::string sIndex;
+					std::stringstream fss(split[i]);
+					std::getline(fss, sIndex, '/');
+					res.indices.push_back(std::stoi(sIndex));
 				}
 			}
 		}
