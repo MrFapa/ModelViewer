@@ -8,6 +8,7 @@ int main()
 	if(!LibraryManager::InitializeLibraries())
 		return -1;
 
+
 	Application* app = new Application();
 	app->Run();
 	delete app;

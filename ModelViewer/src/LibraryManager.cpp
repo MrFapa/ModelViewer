@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include <iostream>
+#include "OpenGLLogger.h"
 
 bool LibraryManager::InitializeLibraries()
 {
@@ -34,7 +34,7 @@ bool LibraryManager::InitializeGLFW()
 	if(!glfwInit())
 	{
 		// logging library later on
-		std::cout << "GLFW Initialization failed! " << std::endl;
+		LogFatal("GLFW could not be initialized");
 		glfwInitialized = false;
 		return false;
 	}
@@ -55,20 +55,18 @@ bool LibraryManager::InitializeGLEW()
 	GLFWwindow* tempWindow = glfwCreateWindow(1, 1, "", nullptr, nullptr);
 	if (!tempWindow)
 	{
-		std::cout << "GLEW Initialization failed: Couldn't create temporary window for initialization" << std::endl;
+		LogFatal("GLEW Initialization failed: Couldn't create temporary window for initialization");
 		return false;
 	}
 	// Resets this for the next CreateWindow call
 	glfwWindowHint(GLFW_VISIBLE, GLFW_TRUE);
-
+	
 	glfwMakeContextCurrent(tempWindow);
-
-	GLenum err = glewInit();
+	GLCall(GLenum err = glewInit());
 	if(GLEW_OK != err)
 	{
 		glfwDestroyWindow(tempWindow);
-		// logging library later on
-		std::cout << "GLEW Initialization failed: " << glewGetErrorString(err) << std::endl;
+		
 		glewInitialized = false;
 		return false;
 	}

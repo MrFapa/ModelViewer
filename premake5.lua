@@ -20,12 +20,14 @@ project "ModelViewer"
 
     files {
         "%{prj.name}/src/**.h",
-        "%{prj.name}/src/**.cpp"
+        "%{prj.name}/src/**.cpp",
+        "%{prj.name}/Dependencies/spdlog/src/*.cpp"
     }
 
     includedirs {
         "%{IncludeDir.GLFW}",
-        "%{IncludeDir.GLEW}"
+        "%{IncludeDir.GLEW}",
+        "%{prj.name}/Dependencies/spdlog/include"
     }
 
     libdirs {
@@ -48,7 +50,10 @@ project "ModelViewer"
     }
 
     filter "configurations:Debug"
-        defines "MV_DEBUG"
+        defines {
+            "MV_DEBUG",
+            "SPDLOG_COMPILED_LIB"   
+        }
         symbols "On"
 
     filter "configurations:Release"
