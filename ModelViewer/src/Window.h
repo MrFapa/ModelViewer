@@ -18,9 +18,7 @@ public:
 	};
 
 	static Window* CreateWindow(WindowSettings settings);
-	void OnUpdate();
-
-	void SetUpdateFunction(const std::function<void()>& updateFunction);
+	void Update();
 
 	int GetWidth() const { return m_Width; }
 	int GetHeight() const { return m_Height; }
@@ -36,6 +34,5 @@ private:
 	const char* m_Title;
 
 	bool m_IsValid;
-
-	std::function<void()> m_UpdateFunction;
+	
 };
