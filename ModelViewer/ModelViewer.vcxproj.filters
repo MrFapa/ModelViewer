@@ -13,6 +13,18 @@
     <Filter Include="src">
       <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\vendor">
+      <UniqueIdentifier>{EA4CE07F-D604-22CD-3F0C-FB282BE3BCBD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\vendor\glm">
+      <UniqueIdentifier>{393CCCDF-250A-C0E5-0E9E-300CFA0A9C4A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\vendor\glm\detail">
+      <UniqueIdentifier>{DB1973BD-4786-2EB8-107A-C6157CA55020}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\vendor\glm\simd">
+      <UniqueIdentifier>{35245B1D-A185-382B-2AF3-7EDD96536FEA}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h">
@@ -21,8 +33,46 @@
     <ClInclude Include="src\LibraryManager.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Logger.h" />
     <ClInclude Include="src\Window.h" />
+    <ClInclude Include="src\Logger.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OBJLoader.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGLLogger.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\glm\simd\common.h">
+      <Filter>src\vendor\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\glm\simd\exponential.h">
+      <Filter>src\vendor\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\glm\simd\geometric.h">
+      <Filter>src\vendor\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\glm\simd\integer.h">
+      <Filter>src\vendor\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\glm\simd\matrix.h">
+      <Filter>src\vendor\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\glm\simd\neon.h">
+      <Filter>src\vendor\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\glm\simd\packing.h">
+      <Filter>src\vendor\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\glm\simd\platform.h">
+      <Filter>src\vendor\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\glm\simd\trigonometric.h">
+      <Filter>src\vendor\glm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="src\vendor\glm\simd\vector_relational.h">
+      <Filter>src\vendor\glm\simd</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dependencies\spdlog\src\async.cpp">
@@ -57,5 +107,8 @@
     </ClCompile>
     <ClCompile Include="src\OpenGLLogger.h" />
     <ClCompile Include="src\Window.cpp" />
+    <ClCompile Include="src\vendor\glm\detail\glm.cpp">
+      <Filter>src\vendor\glm\detail</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
