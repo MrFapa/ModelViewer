@@ -73,6 +73,8 @@
     <ClInclude Include="src\vendor\glm\simd\vector_relational.h">
       <Filter>src\vendor\glm\simd</Filter>
     </ClInclude>
+    <ClInclude Include="src\Mesh.h" />
+    <ClInclude Include="src\MeshRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dependencies\spdlog\src\async.cpp">
@@ -110,5 +112,7 @@
     <ClCompile Include="src\vendor\glm\detail\glm.cpp">
       <Filter>src\vendor\glm\detail</Filter>
     </ClCompile>
+    <ClCompile Include="src\Mesh.cpp" />
+    <ClCompile Include="src\MeshRenderer.cpp" />
   </ItemGroup>
 </Project>

@@ -21,7 +21,7 @@ void Application::Run()
 	Loading::ModelData data = Loading::LoadOBJ("res/models/plate.obj");
 	if(!data.vertexCoord.empty())
 	{
-		LogInfo("Model '{}' was loaded successfully with a total of {} vertices", data.modelName, data.vertexCoord.size());
+		LogInfo("Model '{}' was loaded successfully with a total of {} vertices and {} faces", data.modelName, data.vertexCoord.size(), data.indices.size() / 3);
 	} else
 	{
 		LogWarning("Model '{}' could not be loaded successfully", data.modelName);
