@@ -8,5 +8,5 @@ public:
 
 	void Run();
 private:
-
+	class Window* m_Window;
 };

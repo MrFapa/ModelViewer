@@ -100,6 +100,7 @@
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\LibraryManager.h" />
     <ClInclude Include="src\Logger.h" />
+    <ClInclude Include="src\Window.h" />
     <ClInclude Include="src\OBJLoader.h" />
     <ClInclude Include="src\OpenGLLogger.h" />
     <ClInclude Include="src\vendor\glm\simd\common.h" />
@@ -124,6 +125,8 @@
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\LibraryManager.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\OpenGLLogger.h" />
+    <ClCompile Include="src\Window.cpp" />
     <ClCompile Include="src\vendor\glm\detail\glm.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
