@@ -59,7 +59,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>GLEW_STATIC;MV_DEBUG;SPDLOG_COMPILED_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>Dependencies\GLFW\include;Dependencies\glew-2.1.0\include;Dependencies\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Dependencies\GLFW\include;Dependencies\glew-2.1.0\include;Dependencies\spdlog\include;src\vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -78,7 +78,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>GLEW_STATIC;MV_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>Dependencies\GLFW\include;Dependencies\glew-2.1.0\include;Dependencies\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Dependencies\GLFW\include;Dependencies\glew-2.1.0\include;Dependencies\spdlog\include;src\vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -100,6 +100,18 @@
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\LibraryManager.h" />
     <ClInclude Include="src\Logger.h" />
+    <ClInclude Include="src\OBJLoader.h" />
+    <ClInclude Include="src\OpenGLLogger.h" />
+    <ClInclude Include="src\vendor\glm\simd\common.h" />
+    <ClInclude Include="src\vendor\glm\simd\exponential.h" />
+    <ClInclude Include="src\vendor\glm\simd\geometric.h" />
+    <ClInclude Include="src\vendor\glm\simd\integer.h" />
+    <ClInclude Include="src\vendor\glm\simd\matrix.h" />
+    <ClInclude Include="src\vendor\glm\simd\neon.h" />
+    <ClInclude Include="src\vendor\glm\simd\packing.h" />
+    <ClInclude Include="src\vendor\glm\simd\platform.h" />
+    <ClInclude Include="src\vendor\glm\simd\trigonometric.h" />
+    <ClInclude Include="src\vendor\glm\simd\vector_relational.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dependencies\spdlog\src\async.cpp" />
@@ -112,7 +124,7 @@
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\LibraryManager.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\OpenGLLogger.h" />
+    <ClCompile Include="src\vendor\glm\detail\glm.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -27,7 +27,8 @@ project "ModelViewer"
     includedirs {
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.GLEW}",
-        "%{prj.name}/Dependencies/spdlog/include"
+        "%{prj.name}/Dependencies/spdlog/include",
+        "%{prj.name}/src/vendor"
     }
 
     libdirs {
