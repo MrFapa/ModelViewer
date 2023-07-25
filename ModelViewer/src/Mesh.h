@@ -4,7 +4,7 @@
 class Mesh
 {
 public:
-	Mesh(std::vector<float> vertices, std::vector<int> indices);
+	Mesh(std::vector<float> vertices, std::vector<unsigned int> indices);
 	~Mesh();
 
 	class MeshRenderer* GetMeshRenderer() { return m_MeshRenderer; }

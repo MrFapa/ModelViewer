@@ -15,8 +15,8 @@ namespace Loading
 	struct ModelData
 	{
 		std::string modelName;
-		std::vector<glm::vec3> vertexCoord;
-		std::vector<int> indices;
+		std::vector<float> vertexCoord;
+		std::vector<unsigned int> indices;
 		std::vector<glm::vec3> normals;
 		std::vector<glm::vec3> texCoord;
 	};
@@ -66,7 +66,9 @@ namespace Loading
 					float x = std::stof(split[1]);
 					float y = std::stof(split[2]);
 					float z = std::stof(split[3]);
-					res.vertexCoord.push_back({ x, y, z });
+					res.vertexCoord.push_back(x);
+					res.vertexCoord.push_back(y);
+					res.vertexCoord.push_back(z);
 				}
 				else
 				{

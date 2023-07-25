@@ -2,16 +2,14 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-
-#include "OpenGLLogger.h"
+#include "Logger.h"
 
 bool LibraryManager::InitializeLibraries()
 {
 	if (!InitializeGLFW())
 		return false;
 
-	if (!InitializeGLEW())
-		return false;
+	// Glew need to be initialized in the window class because of the context
 
 	return true;
 }
@@ -48,34 +46,13 @@ bool LibraryManager::InitializeGLEW()
 	if (glewInitialized)
 		return true;
 
-	// Important so that the tempWindow doesnt pop up
-	glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-
-	// Create temporary context for the glew initialization
-	GLFWwindow* tempWindow = glfwCreateWindow(1, 1, "", nullptr, nullptr);
-	if (!tempWindow)
-	{
-		LogFatal("GLEW Initialization failed: Couldn't create temporary window for initialization");
-		return false;
-	}
-	// Resets this for the next CreateWindow call
-	glfwWindowHint(GLFW_VISIBLE, GLFW_TRUE);
-	
-	glfwMakeContextCurrent(tempWindow);
-	GLCall(GLenum err = glewInit());
+	GLenum err = glewInit();
 	if(GLEW_OK != err)
 	{
-		glfwDestroyWindow(tempWindow);
-		
 		glewInitialized = false;
 		return false;
 	}
 
-	// Clean up temporary Window
-	glfwMakeContextCurrent(nullptr);
-	glfwDestroyWindow(tempWindow);
-
-	glewInitialized = true;
 	return true;
 }
 
