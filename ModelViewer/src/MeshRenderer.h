@@ -1,10 +1,11 @@
 #pragma once
 #include <vector>
+#include "Mesh.h"
 
 class MeshRenderer
 {
 public:
-	MeshRenderer(const std::vector<float> &vertexPositions, const std::vector<unsigned int> &indices);
+	MeshRenderer();
 	~MeshRenderer();
 
 	void Bind() const;
@@ -12,7 +13,12 @@ public:
 
 	void Draw() const;
 
+	bool SetData(Mesh::MeshDataType key, const std::vector<float>& data );
+
 private:
+	int GetCountFromMeshDataType(Mesh::MeshDataType dataType);
+
+
 	unsigned int m_VBO;
 	unsigned int m_VAO;
 	unsigned int m_IBO;

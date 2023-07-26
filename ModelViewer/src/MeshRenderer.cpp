@@ -1,7 +1,8 @@
 #include "MeshRenderer.h"
 #include "OpenGLLogger.h"
 
-MeshRenderer::MeshRenderer(const std::vector<float> &vertexPositions, const std::vector<unsigned int> &indices)
+
+MeshRenderer::MeshRenderer()
 {
 
 	glGenVertexArrays(1, &m_VAO);
@@ -45,6 +46,31 @@ void MeshRenderer::Draw() const
 {
 	glDrawElements(GL_TRIANGLES, m_IBOSize, GL_UNSIGNED_INT, 0);
 }
+
+bool MeshRenderer::SetData(Mesh::MeshDataType key, const std::vector<float>& data)
+{
+	switch(key)
+	{
+		
+	}
+}
+
+int MeshRenderer::GetCountFromMeshDataType(Mesh::MeshDataType dataType)
+{
+	switch (dataType)
+	{
+	case Mesh::MeshDataType::Position:
+		return 3;
+	case Mesh::MeshDataType::Normal:
+		return 3;
+	case Mesh::MeshDataType::UV:
+		return 2;
+	default:
+		return 0;
+	}
+}
+
+
 
 
 

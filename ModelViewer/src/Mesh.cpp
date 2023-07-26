@@ -1,13 +1,25 @@
 #include "Mesh.h"
 #include "MeshRenderer.h"
 
-Mesh::Mesh(std::vector<float> vertices, std::vector<unsigned int> indices)
+Mesh::Mesh()
 {
-	m_MeshRenderer = new MeshRenderer(vertices, indices);
+	m_MeshRenderer = MeshRenderer();
+    for (int i = static_cast<int>(MeshDataType::Position); i <= static_cast<int>(MeshDataType::UV); ++i) {
+        auto dataType = static_cast<MeshDataType>(i);
+
+        m_MeshData[dataType] = std::vector<float>();
+    }
 }
 
 Mesh::~Mesh()
 {
-	delete m_MeshRenderer;
 }
 
+bool Mesh::UploadToMeshRenderer()
+{
+	for(auto iterator = m_MeshData.begin(); iterator != m_MeshData.end(); ++iterator)
+	{
+		MeshDataType key = iterator->first;
+		m_MeshRenderer.
+	}
+}

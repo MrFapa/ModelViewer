@@ -22,9 +22,9 @@ Application::~Application()
 void Application::Run()
 {
     LogInfo("Application starts running");
-
-	Loading::ModelData data = Loading::LoadOBJ("res/models/hollow_cube.obj");
-	if(!data.vertexCoord.empty())
+	Mesh mesh = Mesh();
+	Loading::LoadOBJ("res/models/hollow_cube.obj", mesh.);
+	if(false)
 	{
 		LogInfo("Model '{}' was loaded successfully with a total of {} vertices and {} faces", data.modelName, data.vertexCoord.size() / 3, data.indices.size() / 3);
 	} else
