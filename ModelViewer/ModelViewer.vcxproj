@@ -101,6 +101,7 @@
     <ClInclude Include="src\LibraryManager.h" />
     <ClInclude Include="src\Logger.h" />
     <ClInclude Include="src\Mesh.h" />
+    <ClInclude Include="src\MeshDataType.h" />
     <ClInclude Include="src\Window.h" />
     <ClInclude Include="src\MeshRenderer.h" />
     <ClInclude Include="src\OBJLoader.h" />

@@ -75,6 +75,7 @@
     </ClInclude>
     <ClInclude Include="src\Mesh.h" />
     <ClInclude Include="src\MeshRenderer.h" />
+    <ClInclude Include="src\MeshDataType.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dependencies\spdlog\src\async.cpp">

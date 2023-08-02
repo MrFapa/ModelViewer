@@ -43,8 +43,8 @@ bool LibraryManager::InitializeGLFW()
 bool LibraryManager::InitializeGLEW()
 {
 	// Check if already initialized
-	if (glewInitialized)
-		return true;
+	/*if (glewInitialized)
+		return true;*/
 
 	GLenum err = glewInit();
 	if(GLEW_OK != err)
