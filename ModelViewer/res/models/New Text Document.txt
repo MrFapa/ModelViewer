@@ -1,0 +1,182 @@
+const char* vertexShaderSource = R"(#version 330 core
+	layout (location = 0) in vec3 aPos; 
+
+	uniform mat4 u_MVP;
+	void main()
+	{
+	    gl_Position = u_MVP * vec4(aPos, 1.0);
+	})";
+
+	const char* fragmentShaderSource = R"(#version 330 core
+	out vec4 FragColor;
+
+	void main()
+	{
+	    FragColor = vec4(1.0, 1.0, 0.0, 1.0);
+	})";
+
+	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
+	GLCall(glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr));
+	GLCall(glCompileShader(vertexShader));
+
+	unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+	GLCall(glShaderSource(fragmentShader, 1, &fragmentShaderSource, nullptr));
+	GLCall(glCompileShader(fragmentShader));
+
+	// Create shader program and link shaders
+	unsigned int shaderProgram = glCreateProgram();
+	GLCall(glAttachShader(shaderProgram, vertexShader));
+	GLCall(glAttachShader(shaderProgram, fragmentShader));
+	GLCall(glLinkProgram(shaderProgram));
+	GLCall(glUseProgram(shaderProgram));
+
+	glm::mat4 proj = glm::ortho(-640.0f, 640.0f, -360.0f, 360.0f, -1.0f, 1.0f);
+
+	glm::mat4 view = glm::lookAt(
+		glm::vec3(0.0f, 0.0f, 0.0f),   // Camera position (eye)
+		glm::vec3(0.0f, 0.0f, -1.0f),  // Target position (center)
+		glm::vec3(0.0f, 1.0f, 0.0f)    // Up vector
+	);
+
+	glm::mat4 model = glm::mat4(1.0f); // Identity matrix
+	model = glm::translate(model, glm::vec3(0.0f, 0.0f, -5.0f)); // Place the triangle 5 units away from the camera in the negative Z-axis direction
+
+	glm::mat4 mvp = proj * view * model;
+
+	std::vector<Vertex> triangleVertices = {
+		// Position       // Normal       // UV
+		{glm::vec3(-0.5f, -0.5f, 0.0f),  glm::vec3(0, 0, 1), glm::vec2(0, 0)},
+		{glm::vec3(0.5f, -0.5f, 0.0f),   glm::vec3(0, 0, 1), glm::vec2(1, 0)},
+		{glm::vec3(0.0f, 0.5f, 0.0f),    glm::vec3(0, 0, 1), glm::vec2(0.5, 1)},
+	};
+	MeshRenderer meshRenderer(triangleVertices);
+
+
+
+
+
+
+
+
+
+	#include "Application.h"
+
+#include "glm/gtc/matrix_transform.hpp"
+#include "OpenGLLogger.h"
+#include "Window.h"
+#include "Mesh.h"
+#include "OBJLoader.h"
+#include "LibraryManager.h"
+#include "MeshRenderer.h"
+
+Application::Application()
+{
+	m_Window = Window::CreateWindow({ 1280, 720, "Working Window" });
+}
+
+Application::~Application()
+{
+	
+}
+
+void Application::Run()
+{
+	GLenum err = glewInit();
+	if (GLEW_OK != err)
+	{
+		return;
+	}
+
+
+    LogInfo("Application starts running");
+
+	const char* vertexShaderSource = R"(#version 330 core
+
+	layout (location = 0) in vec3 aPos; 
+
+	uniform mat4 u_MVP;
+	void main()
+	{
+	    gl_Position = u_MVP * vec4(aPos, 1.0);
+	})";
+
+	const char* fragmentShaderSource = R"(#version 330 core
+
+	out vec4 FragColor;
+
+	void main()
+	{
+	    FragColor = vec4(1.0, 1.0, 0.0, 1.0);
+	})";
+
+	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
+	GLCall(glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr));
+	GLCall(glCompileShader(vertexShader));
+
+	unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+	GLCall(glShaderSource(fragmentShader, 1, &fragmentShaderSource, nullptr));
+	GLCall(glCompileShader(fragmentShader));
+
+	// Create shader program and link shaders
+	unsigned int shaderProgram = glCreateProgram();
+	GLCall(glAttachShader(shaderProgram, vertexShader));
+	GLCall(glAttachShader(shaderProgram, fragmentShader));
+	GLCall(glLinkProgram(shaderProgram));
+	GLCall(glUseProgram(shaderProgram));
+
+	glm::mat4 proj = glm::ortho(0.0f, 1280.0f, 0.0f, 720.0f, -1.0f, 1.0f);
+	glm::mat4 view = glm::lookAt(
+		glm::vec3(0.0f, 0.0f, 0.0f),   // Camera position (eye)
+		glm::vec3(0.0f, 0.0f, -1.0f),  // Target position (center)
+		glm::vec3(0.0f, 1.0f, 0.0f)    // Up vector
+	);
+
+	glm::mat4 model = glm::mat4(1.0f); // Identity matrix
+	float distanceFromCamera = 5.0f; // Adjust this value to position the object farther away
+	model = glm::translate(model, glm::vec3(0.0f, 0.0f, distanceFromCamera));
+
+	glm::mat4 mvp = proj * view * model;
+
+	std::vector<Vertex> quadVertices = {
+		// Position       // Normal       // UV
+		{glm::vec3(-0.5f, -0.5f, 0.5f),  glm::vec3(0, 0, 1), glm::vec2(0, 0)},
+		{glm::vec3(0.5f, -0.5f, 0.5f),   glm::vec3(0, 0, 1), glm::vec2(1, 0)},
+		{glm::vec3(0.5f, 0.5f, 0.5f),    glm::vec3(0, 0, 1), glm::vec2(1, 1)},
+
+		{glm::vec3(-0.5f, -0.5f, 0.5f),  glm::vec3(0, 0, 1), glm::vec2(0, 0)},
+		{glm::vec3(0.5f, 0.5f, 0.5f),    glm::vec3(0, 0, 1), glm::vec2(1, 1)},
+		{glm::vec3(-0.5f, 0.5f, 0.5f),   glm::vec3(0, 0, 1), glm::vec2(0, 1)},
+	};
+	MeshRenderer meshRenderer(quadVertices);
+
+	/*Mesh mesh = Mesh();
+	
+	if(Loading::LoadOBJ("res/models/cube.obj", mesh))
+	{
+		LogInfo("Model was loaded successfully with a total of {} vertices ", mesh.GetVertices().size());
+	} else
+	{
+		LogWarning("Model could not be loaded successfully");
+	}
+	mesh.InitMeshRenderer();*/
+  
+	while(m_Window->IsValid())
+	{
+		m_Window->Update();
+
+		glClearColor(0.15f, 0.15f, 0.15f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		GLCall(glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "u_MVP"), 1, GL_FALSE, &mvp[0][0]));
+		meshRenderer.Bind();
+		meshRenderer.Draw();
+		//mesh.GetMeshRenderer().Bind();
+		//mesh.GetMeshRenderer().Draw();
+	}
+
+
+	glDeleteShader(vertexShader);
+	glDeleteShader(fragmentShader);
+	glDeleteProgram(shaderProgram);
+}
+

@@ -1,5 +1,6 @@
 #include "Window.h"
 #include "Logger.h"
+#include "LibraryManager.h"
 
 Window* Window::CreateWindow(WindowSettings settings)
 {
@@ -30,7 +31,7 @@ Window::Window(int width, int height, const char* title)
 	m_Window = glfwCreateWindow(m_Width, m_Height, m_Title, nullptr, nullptr);
 
 	m_IsValid = m_Window;
-	if (m_IsValid)
+	if (!m_IsValid)
 		return;
 
 	glfwMakeContextCurrent(m_Window);
