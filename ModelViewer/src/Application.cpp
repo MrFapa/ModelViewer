@@ -33,14 +33,17 @@ const int indicess[3] = {
 const char* vertexShaderSource = R"(
 #version 330 core
 layout (location = 0) in vec3 aPos;
+layout (location = 1) in vec3 aNormal;
+layout (location = 2) in vec2 aUV;
 
-out float oDepth; // Change 'vec1' to 'float'
+out float oDepth;
+out vec3 oNormal;
+out vec2 oUV;
 
-uniform float rotationAngle; // The rotation angle uniform
+uniform float rotationAngle;
 
 void main()
 {
-    // Create a rotation matrix using the rotation angle around the Z-axis
     mat4 rotationMatrixZ = mat4(
         1.0, 0.0, 0.0, 0.0,
         0.0, cos(0.5f), -sin(0.5f), 0.0,
@@ -59,13 +62,17 @@ void main()
     vec3 rotatedPosition = (rotationMatrixX * rotationMatrixZ * vec4(aPos, 1.0)).xyz;
 
     gl_Position = vec4(rotatedPosition, 1.0);
-    oDepth = aPos.z; // Change 'aDepth' to 'oDepth'
+    oDepth = aPos.z; 
+	oNormal = aNormal;
+	oUV = aUV;
 }
 )";
 const char* fragmentShaderSource = R"(
 #version 330 core
 
 in float oDepth; // Change 'vec1' to 'float'
+in vec3 oNormal;
+in vec2 oUV;
 
 out vec4 FragColor;
 
@@ -73,6 +80,8 @@ void main()
 {
     // Visualize the depth by converting it to a color
     FragColor = vec4(0.3f, 0.1f, oDepth + 0.5f, 1.0f);
+	FragColor = vec4(oUV, 0.0f, 1.0f);
+	FragColor = vec4(oNormal, 1.0f);
 }
 )";
 
