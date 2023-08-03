@@ -5,7 +5,7 @@
 class MeshRenderer
 {
 public:
-    MeshRenderer() : m_VBO(0), m_VAO(0), m_FaceCount(0) {}
+    MeshRenderer() : m_VBO(0), m_VAO(0),m_IBO(0), m_IBOSize(0) {}
     MeshRenderer(const std::vector<Vertex>& vertices);
     ~MeshRenderer();
 
@@ -19,7 +19,7 @@ private:
 
     unsigned int m_VBO;
     unsigned int m_VAO;
-    //unsigned int m_IBO;
+    unsigned int m_IBO;
     
-    unsigned int m_FaceCount;
+    unsigned int m_IBOSize;
 };

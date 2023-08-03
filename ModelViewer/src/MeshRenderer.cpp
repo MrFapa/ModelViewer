@@ -15,30 +15,41 @@ MeshRenderer::~MeshRenderer()
 
 void MeshRenderer::Init(const std::vector<Vertex>& vertices)
 {
+    std::vector<float> positions;
+    std::vector<unsigned int> indices(vertices.size());
+
+    for (int i = 0; i < vertices.size(); i++)
+    {
+        indices[i] = i;
+        positions.push_back(vertices[i].position.x);
+        positions.push_back(vertices[i].position.y);
+        positions.push_back(vertices[i].position.z);
+    }
+
     GLCall(glGenVertexArrays(1, &m_VAO));
     GLCall(glBindVertexArray(m_VAO));
 
     GLCall(glGenBuffers(1, &m_VBO));
 
     GLCall(glBindBuffer(GL_ARRAY_BUFFER, m_VBO));
-    GLCall(glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * vertices.size(), vertices.data(), GL_STATIC_DRAW));
+    GLCall(glBufferData(GL_ARRAY_BUFFER, positions.size() * sizeof(float), positions.data(), GL_STATIC_DRAW););
 
-    GLCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0));
+    GLCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0));
     GLCall(glEnableVertexAttribArray(0));
 
-    GLCall(glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(3 * sizeof(float))));
-    GLCall(glEnableVertexAttribArray(1));
+    //GLCall(glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(3 * sizeof(float))));
+    //GLCall(glEnableVertexAttribArray(1));
 
-    GLCall(glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(6 * sizeof(float))));
-    GLCall(glEnableVertexAttribArray(2));
+    //GLCall(glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(6 * sizeof(float))));
+    //GLCall(glEnableVertexAttribArray(2));
 
-    /*glGenBuffers(1, &m_IBO);
+    glGenBuffers(1, &m_IBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 0, nullptr, GL_STATIC_DRAW);*/
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
 
     GLCall(glBindVertexArray(0));
 
-    m_FaceCount = vertices.size();
+    m_IBOSize = indices.size();
 }
 
 
@@ -54,5 +65,5 @@ void MeshRenderer::Unbind() const
 
 void MeshRenderer::Draw() const
 {
-    GLCall(glDrawArrays(GL_TRIANGLES, 0, m_FaceCount / 3));
+    GLCall(glDrawElements(GL_TRIANGLES, m_IBOSize, GL_UNSIGNED_INT, (void*)0));
 }

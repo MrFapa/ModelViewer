@@ -43,8 +43,8 @@ void main()
     // Create a rotation matrix using the rotation angle around the Z-axis
     mat4 rotationMatrixZ = mat4(
         1.0, 0.0, 0.0, 0.0,
-        0.0, cos(0.7f), -sin(0.7f), 0.0,
-        0.0, sin(0.7f), cos(0.7f), 0.0,
+        0.0, cos(0.5f), -sin(0.5f), 0.0,
+        0.0, sin(0.5f), cos(0.5f), 0.0,
         0.0, 0.0, 0.0, 1.0
     );
 
@@ -123,7 +123,7 @@ void Application::Run()
 
     Mesh mesh = Mesh();
 
-    if (Loading::LoadOBJ("res/models/hollow_cube.obj", mesh))
+    if (Loading::LoadOBJ("res/models/extruded_cube.obj", mesh))
     {
         LogInfo("Model was loaded successfully with a total of {} positions ", mesh.GetVertices().size());
     }
@@ -134,37 +134,7 @@ void Application::Run()
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
-    std::vector<float> positions;
-    std::vector<Vertex> vertices = mesh.GetVertices();
-    std::vector<unsigned int> indices(vertices.size());
-
-    for(int i = 0; i < vertices.size(); i++)
-    {
-        indices[i] = i;
-        positions.push_back(vertices[i].position.x);
-        positions.push_back(vertices[i].position.y);
-        positions.push_back(vertices[i].position.z);
-    }
-
-
-    unsigned int VBO, VAO, IBO;
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
-    // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
-    glBindVertexArray(VAO);
-
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, positions.size() * sizeof(float), positions.data(), GL_STATIC_DRAW);
-    
-    GLCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0));
-    glEnableVertexAttribArray(0);
-
-    // note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    glGenBuffers(1, &IBO);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
+    mesh.GetMeshRenderer().Init(mesh.GetVertices());
 
     float rotationAngle = 0.0f;
     glEnable(GL_DEPTH_TEST);
@@ -183,9 +153,8 @@ void Application::Run()
         glUniform1f(rotationAngleLoc, rotationAngle);
 
         glUseProgram(shaderProgram);
-        glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-        //glDrawArrays(GL_TRIANGLES, 0, 6);
-        GLCall(glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, (void*)0));
+        mesh.GetMeshRenderer().Bind();
+        mesh.GetMeshRenderer().Draw();
 
 	}
 
