@@ -7,28 +7,11 @@ out float oDepth;
 out vec3 oNormal;
 out vec2 oUV;
 
-uniform float rotationAngle;
-
+uniform float scale;
+uniform mat4 MVP;
 void main()
 {
-    mat4 rotationMatrixZ = mat4(
-        1.0, 0.0, 0.0, 0.0,
-        0.0, cos(0.5f), -sin(0.5f), 0.0,
-        0.0, sin(0.5f), cos(0.5f), 0.0,
-        0.0, 0.0, 0.0, 1.0
-    );
-
-    mat4 rotationMatrixX = mat4(
-        cos(rotationAngle), 0.0, sin(rotationAngle), 0.0,
-        0.0, 1.0, 0.0, 0.0,
-        -sin(rotationAngle), 0.0, cos(rotationAngle), 0.0,
-        0.0, 0.0, 0.0, 1.0
-    );
-
-    // Apply the rotation to the vertex position
-    vec3 rotatedPosition = (rotationMatrixX * rotationMatrixZ * vec4(aPos, 1.0)).xyz;
-
-    gl_Position = vec4(rotatedPosition, 1.0);
+    gl_Position = MVP * vec4(aPos * scale, 1.0);
     oDepth = aPos.z; 
 	oNormal = aNormal;
 	oUV = aUV;

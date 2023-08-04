@@ -1,7 +1,5 @@
 #include "Application.h"
 
-#include <iostream>
-
 #include "glm/gtc/matrix_transform.hpp"
 #include "OpenGLLogger.h"
 #include "Window.h"
@@ -9,10 +7,14 @@
 #include "OBJLoader.h"
 #include "MeshRenderer.h"
 #include "Shader.h"
+#include "Camera.h"
+
+// Temp
+const int WIDTH = 1080, HEIGHT = 720;
 
 Application::Application()
 {
-	m_Window = Window::CreateWindow({ 720, 720, "Working Window" });
+	m_Window = Window::CreateWindow({ WIDTH, HEIGHT, "Working Window" });
 }
 
 Application::~Application()
@@ -29,6 +31,10 @@ void Application::Run()
 	}
 
     Shader shader = Shader("res/shaders/base_vertex.glsl", "res/shaders/base_fragment.glsl");
+	Camera camera = Camera();
+	glm::mat4 proj = glm::perspective(glm::radians(45.0f), (float)WIDTH / (float)HEIGHT, 0.1f, 100.0f);
+	camera.setPosition({ 1.0f, 2.0f, -2.0f });
+	glm::mat4 view = camera.GetViewMatrix();
 
     Mesh mesh = Mesh();
     (Loading::LoadOBJ("res/models/hollow_cube.obj", mesh) ? 
@@ -40,17 +46,14 @@ void Application::Run()
     shader.Bind();
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
-    float rotationAngle = 0.0f;
 	while (m_Window->IsValid())
 	{
 		m_Window->Update();
 
-		glClearColor(0.15f, 0.15f, 0.15f, 1.0f);
+		glClearColor(0.02f, 0.2f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        rotationAngle += glm::radians(0.2f);
-        shader.SetUniform1f("rotationAngle", rotationAngle);
-
+		shader.SetUniform1f("scale", 1.0f);
+		shader.SetUniformMat4("MVP", proj * view  );
         mesh.GetMeshRenderer().Bind();
         mesh.GetMeshRenderer().Draw();
 

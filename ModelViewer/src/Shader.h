@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <glm/gtc/matrix_transform.hpp>
 
 class Shader
 {
@@ -13,6 +14,7 @@ public:
 	void Unbind();
 
 	void SetUniform1f(const std::string &name, float value);
+	void Shader::SetUniformMat4(const std::string& name, glm::mat4 matrix);
 
 private:
 	void CreateShader(const std::string &vsSource, const std::string &fsSource);
