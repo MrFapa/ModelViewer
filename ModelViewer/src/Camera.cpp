@@ -1,7 +1,7 @@
 #include "Camera.h"
 
 Camera::Camera()
-	: m_Position({0, 0, -3}), m_Target({0, 0, 0}), m_NearPlane(-1), m_FarPlane(1), m_IsPerspective(false)
+	: m_Position({0, 0, -3}), m_Target({0, 0, 0})
 {
     UpdateVectors();
 }

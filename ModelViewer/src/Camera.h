@@ -10,10 +10,10 @@ public:
 
     void Move(float yaw, float pitch);
 
-    void setPosition(const glm::vec3& position) { m_Position = position; }
-    void setTarget(const glm::vec3& target) { m_Target = target; }
-    void setNearPlane(float nearPlane) { m_NearPlane = nearPlane; }
-    void setFarPlane(float farPlane) { m_FarPlane = farPlane; }
+    void SetPosition(const glm::vec3& position) { m_Position = position; }
+    void SetTarget(const glm::vec3& target) { m_Target = target; }
+    //void setNearPlane(float nearPlane) { m_NearPlane = nearPlane; }
+    //void setFarPlane(float farPlane) { m_FarPlane = farPlane; }
 
     glm::mat4 GetViewMatrix();
     glm::vec3 GetPosition() const { return m_Position; }
@@ -28,11 +28,11 @@ private:
     glm::vec3 m_Forward;
     glm::vec3 m_Up;
     glm::vec3 m_Right;
-    float m_NearPlane;
-    float m_FarPlane;
-    bool m_IsPerspective;
+    //float m_NearPlane;
+    //float m_FarPlane;
+    //bool m_IsPerspective;
 
-    glm::mat4 m_ViewMatrix;
+    //glm::mat4 m_ViewMatrix;
 
 private:
 

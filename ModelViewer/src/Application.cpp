@@ -33,7 +33,7 @@ void Application::Run()
     Shader shader = Shader("res/shaders/base_vertex.glsl", "res/shaders/base_fragment.glsl");
 	glm::mat4 proj = glm::perspective(glm::radians(45.0f), (float)WIDTH / (float)HEIGHT, 0.1f, 100.0f);
 
-	m_Camera->setPosition({ 0.0f, 0.0f, 10.0f });
+	m_Camera->SetPosition({ 0.0f, 0.0f, 10.0f });
 
     Mesh mesh = Mesh();
     (Loading::LoadOBJ("res/models/chest.obj", mesh) ? 
@@ -55,7 +55,11 @@ void Application::Run()
 
 		double xpos, ypos;
 		glfwGetCursorPos(m_Window->GetGLFWWindow(), &xpos, &ypos);
-		m_Camera->Move((float) glm::radians(100 * (xpos - lastXpos) / WIDTH), (float) glm::radians(100 * (ypos - lastYpos) / HEIGHT));
+		if(glfwGetMouseButton(m_Window->GetGLFWWindow(), GLFW_MOUSE_BUTTON_LEFT))
+		{
+			// 100 is just hardcoded, speed will be adjustable with imgui later
+			m_Camera->Move((float) glm::radians(100 * (xpos - lastXpos) / WIDTH), (float) glm::radians(100 * (ypos - lastYpos) / HEIGHT));
+		}
 		glm::mat4 view = m_Camera->GetViewMatrix();
 
 		shader.SetUniform1f("scale", 1.0f);
