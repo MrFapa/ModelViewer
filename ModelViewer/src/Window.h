@@ -20,6 +20,7 @@ public:
 	static Window* CreateWindow(WindowSettings settings);
 	void Update();
 
+	GLFWwindow* GetGLFWWindow() { return m_Window; }
 	int GetWidth() const { return m_Width; }
 	int GetHeight() const { return m_Height; }
 	bool IsValid() const { return m_IsValid; }

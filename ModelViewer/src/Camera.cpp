@@ -1,16 +1,28 @@
 #include "Camera.h"
 
-#include <ios>
-
 Camera::Camera()
-	: m_Position({0, 0, -3}), m_Target({0, 0, 1}), m_NearPlane(-1), m_FarPlane(1), m_IsPerspective(false)
+	: m_Position({0, 0, -3}), m_Target({0, 0, 0}), m_NearPlane(-1), m_FarPlane(1), m_IsPerspective(false)
 {
     UpdateVectors();
 }
 
 void Camera::Move(float yaw, float pitch)
 {
-	
+	glm::mat3 xRot =
+	{
+		glm::cos(yaw), 0, glm::sin(yaw),
+		0,			   1, 0,
+		-glm::sin(yaw),0, glm::cos(yaw)
+	};
+	m_Position = xRot * m_Position;
+	glm::mat3 yRot =
+	{
+		1, 0, 0,
+		0, glm::cos(pitch), -glm::sin(pitch),
+		0 ,glm::sin(pitch), glm::cos(pitch)
+	};
+
+	m_Position = yRot * m_Position;
 }
 
 void Camera::UpdateVectors()
