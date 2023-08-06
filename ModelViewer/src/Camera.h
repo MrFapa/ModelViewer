@@ -6,35 +6,22 @@
 class Camera
 {
 public:
-	Camera();
+	Camera(float aspectRatio);
 
     void Move(float yaw, float pitch);
 
     void SetPosition(const glm::vec3& position) { m_Position = position; }
-    void SetTarget(const glm::vec3& target) { m_Target = target; }
-    //void setNearPlane(float nearPlane) { m_NearPlane = nearPlane; }
-    //void setFarPlane(float farPlane) { m_FarPlane = farPlane; }
 
-    glm::mat4 GetViewMatrix();
-    glm::vec3 GetPosition() const { return m_Position; }
-    glm::vec3 GetTarget() const { return m_Target; }
-    glm::vec3 GetForward() const { return m_Forward; }
-    glm::vec3 GetUp() const { return m_Up; }
-    glm::vec3 GetRight() const { return m_Right; }
-
+    glm::mat4 GetProjViewMatrix();
+    
 private:
     glm::vec3 m_Position;
     glm::vec3 m_Target;
     glm::vec3 m_Forward;
     glm::vec3 m_Up;
     glm::vec3 m_Right;
-    //float m_NearPlane;
-    //float m_FarPlane;
-    //bool m_IsPerspective;
-
-    //glm::mat4 m_ViewMatrix;
+    glm::mat4 m_ProjectionMatrix;
 
 private:
-
     void UpdateVectors();
 };
