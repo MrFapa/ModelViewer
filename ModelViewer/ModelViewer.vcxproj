@@ -98,6 +98,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h" />
+    <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\LibraryManager.h" />
     <ClInclude Include="src\Logger.h" />
     <ClInclude Include="src\Mesh.h" />
@@ -127,6 +128,7 @@
     <ClCompile Include="Dependencies\spdlog\src\spdlog.cpp" />
     <ClCompile Include="Dependencies\spdlog\src\stdout_sinks.cpp" />
     <ClCompile Include="src\Application.cpp" />
+    <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\LibraryManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\OpenGLLogger.h" />
