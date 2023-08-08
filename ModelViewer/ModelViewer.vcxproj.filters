@@ -78,6 +78,8 @@
     <ClInclude Include="src\MeshDataType.h" />
     <ClInclude Include="src\Shader.h" />
     <ClInclude Include="src\Camera.h" />
+    <ClInclude Include="src\Input.h" />
+    <ClInclude Include="src\KeyCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dependencies\spdlog\src\async.cpp">
@@ -119,5 +121,6 @@
     <ClCompile Include="src\MeshRenderer.cpp" />
     <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\Input.cpp" />
   </ItemGroup>
 </Project>

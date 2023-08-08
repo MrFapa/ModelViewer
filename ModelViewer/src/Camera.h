@@ -11,7 +11,7 @@ public:
     void Move(float yaw, float pitch);
 
     void SetPosition(const glm::vec3& position) { m_Position = position; }
-
+    glm::vec3 GetPosition() const { return m_Position; }
     glm::mat4 GetProjViewMatrix();
     
 private:

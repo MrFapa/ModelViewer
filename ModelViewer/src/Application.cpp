@@ -8,6 +8,8 @@
 #include "MeshRenderer.h"
 #include "Shader.h"
 #include "Camera.h"
+#include "Input.h"
+#include "KeyCodes.h"
 
 
 Application::Application()
@@ -15,6 +17,7 @@ Application::Application()
 	m_Window = Window::CreateWindow({ WIDTH, HEIGHT, "Working Window" });
 	m_Camera = new Camera((float)WIDTH / (float)HEIGHT);
 	m_Camera->SetPosition({ 0.0f, 0.0f, 10.0f });
+	Input::GetInstance().Initialize(m_Window->GetGLFWWindow());
 }
 
 Application::~Application()
@@ -26,7 +29,6 @@ Application::~Application()
 void Application::Run()
 {
 	LibraryManager::InitializeGLEW();
-
     Shader shader = Shader("res/shaders/base_vertex.glsl", "res/shaders/base_fragment.glsl");
 	
 
@@ -65,7 +67,17 @@ void Application::Run()
 		lastXpos = xpos;
 		lastYpos = ypos;
 
+		KeyInput key = Input::GetInstance().GetKey(KeyCodes::W);
+		if(Input::GetInstance().GetKey(KeyCodes::W))
+		{
+			m_Camera->SetPosition(m_Camera->GetPosition() + glm::vec3{0, 0, 1});
+		}
+		if (Input::GetInstance().GetKey(KeyCodes::S))
+		{
+			m_Camera->SetPosition(m_Camera->GetPosition() + glm::vec3{ 0, 0, -1 });
+		}
 
+		Input::GetInstance().Update();
 	}
 }
 

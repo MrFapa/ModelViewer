@@ -12,7 +12,6 @@ public:
     static inline int HEIGHT = 1000;
 private:
 
-	class Window* m_Window;
+	struct Window* m_Window;
 	class Camera* m_Camera;
-
 };
