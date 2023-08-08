@@ -17,6 +17,7 @@ void Input::Initialize(GLFWwindow* window)
 {
     m_Window = window;
     glfwSetKeyCallback(m_Window, KeyCallbackStatic);
+    glfwSetMouseButtonCallback(m_Window, MouseButtonCallbackStatic);
 }
 
 KeyInput Input::GetKey(int key)
@@ -30,8 +31,21 @@ KeyInput Input::GetKey(int key)
     return KeyInput();
 }
 
-void Input::Update()
+MouseInput Input::GetMouseButton(int button)
 {
+    auto& instance = GetInstance();
+    auto it = instance.m_MouseMap.find(button);
+    if (it != instance.m_MouseMap.end())
+    {
+        return it->second;
+    }
+    return MouseInput();
+}
+
+
+void Input::ClearInputs()
+{
+    // Keyboard
     std::vector<int> keysToRemove(m_KeyMap.size());
 
     for (auto& it : m_KeyMap)
@@ -42,6 +56,19 @@ void Input::Update()
     for (int key : keysToRemove)
     {
         m_KeyMap.erase(key);
+    }
+
+    // Mouse
+    std::vector<int> buttonsToRemove(m_MouseMap.size());
+
+    for (auto& it : m_MouseMap)
+    {
+        buttonsToRemove.push_back(it.first);
+    }
+
+    for (int button : buttonsToRemove)
+    {
+        m_MouseMap.erase(button);
     }
 }
 
@@ -56,4 +83,17 @@ void Input::KeyCallback(int keycode, int scancode, int action, int mods)
 {
     m_KeyMap[keycode] = KeyInput{ keycode, scancode, action, mods };
 }
+
+void Input::MouseButtonCallbackStatic(GLFWwindow* window, int button, int action, int mods)
+{
+    Input& instance = GetInstance();
+    instance.MouseButtonCallback(button, action, mods);
+}
+
+void Input::MouseButtonCallback(int button, int action, int mods)
+{
+    m_MouseMap[button] = MouseInput{ button, action, mods };
+}
+
+
 

@@ -53,7 +53,7 @@ void Application::Run()
 
 		double xpos, ypos;
 		glfwGetCursorPos(m_Window->GetGLFWWindow(), &xpos, &ypos);
-		if(glfwGetMouseButton(m_Window->GetGLFWWindow(), GLFW_MOUSE_BUTTON_LEFT))
+		if(Input::GetMouseButton(KeyCodes::MOUSE_LEFT))
 		{
 			// 100 is just hardcoded, speed will be adjustable with imgui later
 			m_Camera->Move((float) glm::radians(100 * -(xpos - lastXpos) / WIDTH), (float) glm::radians(100 * -(ypos - lastYpos) / HEIGHT));
@@ -68,16 +68,16 @@ void Application::Run()
 		lastYpos = ypos;
 
 		KeyInput key = Input::GetInstance().GetKey(KeyCodes::W);
-		if(Input::GetInstance().GetKey(KeyCodes::W))
+		if(Input::GetKey(KeyCodes::W))
 		{
 			m_Camera->SetPosition(m_Camera->GetPosition() + glm::vec3{0, 0, 1});
 		}
-		if (Input::GetInstance().GetKey(KeyCodes::S))
+		if (Input::GetKey(KeyCodes::S))
 		{
 			m_Camera->SetPosition(m_Camera->GetPosition() + glm::vec3{ 0, 0, -1 });
 		}
 
-		Input::GetInstance().Update();
+		Input::GetInstance().ClearInputs();
 	}
 }
 

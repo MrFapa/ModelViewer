@@ -2,6 +2,12 @@
 
 namespace KeyCodes {
 
+	//todo Mouse
+	constexpr int MOUSE_LEFT = 0;
+	constexpr int MOUSE_RIGHT = 1;
+	constexpr int MOUSE_MIDDLE = 2;
+
+
 	// Printable keys
 	constexpr int SPACE = 32;
 	constexpr int APOSTROPHE = 39; /* ' */

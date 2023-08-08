@@ -13,7 +13,22 @@ struct KeyInput
 
 	operator bool() const
 	{
-		return KeyCode != -1;
+		return KeyCode > -1;
+	}
+};
+
+struct MouseInput
+{
+	int Button;
+	int Action;
+	int Mods;
+
+	MouseInput(int button, int action, int mods) : Button(button), Action(action), Mods(mods){}
+	MouseInput() : Button(-1), Action(0), Mods(0) {}
+
+	operator bool() const
+	{
+		return Button > -1;
 	}
 };
 
@@ -23,12 +38,16 @@ public:
 	static Input& GetInstance();
 
 	void Initialize(struct GLFWwindow* window);
-	KeyInput GetKey(int key);
-	void Update();
+	static KeyInput GetKey(int key);
+	static MouseInput GetMouseButton(int button);
+	void ClearInputs();
 private:
 	Input();
 	static void KeyCallbackStatic(struct GLFWwindow* window, int keycode, int scancode, int action, int mods);
 	void KeyCallback(int key, int scancode, int action, int mods);
+	static void MouseButtonCallbackStatic(struct GLFWwindow* window, int button, int action, int mods);
+	void MouseButtonCallback(int button, int action, int mods);
 	std::unordered_map<int, KeyInput> m_KeyMap;
+	std::unordered_map<int, MouseInput> m_MouseMap;
 	struct GLFWwindow* m_Window;
 };
