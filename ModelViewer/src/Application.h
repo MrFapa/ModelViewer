@@ -14,5 +14,4 @@ private:
 
 	class Window* m_Window;
 	class Camera* m_Camera;
-
 };
