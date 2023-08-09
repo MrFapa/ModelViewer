@@ -1,6 +1,8 @@
 #pragma once
 
 #include <unordered_map>
+#include <glm/vec2.hpp>
+
 struct KeyInput
 {
 	int KeyCode;
@@ -37,17 +39,26 @@ class Input
 public:
 	static Input& GetInstance();
 
-	void Initialize(struct GLFWwindow* window);
+	static void Initialize(struct GLFWwindow* window);
+	static void Update();
 	static KeyInput GetKey(int key);
 	static MouseInput GetMouseButton(int button);
-	void ClearInputs();
+
+	static glm::vec2 GetMousePosition();
+	static glm::vec2 GetDeltaMousePosition();
 private:
 	Input();
 	static void KeyCallbackStatic(struct GLFWwindow* window, int keycode, int scancode, int action, int mods);
 	void KeyCallback(int key, int scancode, int action, int mods);
 	static void MouseButtonCallbackStatic(struct GLFWwindow* window, int button, int action, int mods);
 	void MouseButtonCallback(int button, int action, int mods);
+
+private:
 	std::unordered_map<int, KeyInput> m_KeyMap;
 	std::unordered_map<int, MouseInput> m_MouseMap;
 	struct GLFWwindow* m_Window;
+	double m_MouseX = 0;
+	double m_MouseY = 0;
+	double m_LastMouseX = 0;
+	double m_LastMouseY = 0;
 };
