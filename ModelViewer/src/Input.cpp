@@ -81,7 +81,8 @@ void Input::KeyCallbackStatic(GLFWwindow* window, int keycode, int scancode, int
 
 void Input::KeyCallback(int keycode, int scancode, int action, int mods)
 {
-    m_KeyMap[keycode] = KeyInput{ keycode, scancode, action, mods };
+    action = (action == GLFW_REPEAT) ? GLFW_PRESS : action;
+    m_KeyMap[keycode] = KeyInput{ keycode, scancode, (action), mods};
 }
 
 void Input::MouseButtonCallbackStatic(GLFWwindow* window, int button, int action, int mods)

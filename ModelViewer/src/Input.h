@@ -9,7 +9,7 @@ struct KeyInput
 	int Mods;
 
 	KeyInput(int keycode, int scancode, int action, int mods) : KeyCode(keycode), Scancode(scancode), Action(action), Mods(mods) {}
-	KeyInput() : KeyCode(-1), Scancode(0), Action(0), Mods(0){}
+	KeyInput() : KeyCode(-1), Scancode(-1), Action(-1), Mods(-1){}
 
 	operator bool() const
 	{
@@ -24,7 +24,7 @@ struct MouseInput
 	int Mods;
 
 	MouseInput(int button, int action, int mods) : Button(button), Action(action), Mods(mods){}
-	MouseInput() : Button(-1), Action(0), Mods(0) {}
+	MouseInput() : Button(-1), Action(-1), Mods(-1) {}
 
 	operator bool() const
 	{
